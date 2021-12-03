@@ -57,7 +57,7 @@ def ped_im_from_anno(data_root, anno, im_anns):
 
 
 def get_img_id(dataset, seq, fname):
-    return int(f"{dataset[3:5]}{seq.split('-')[1]}{int(fname.split('.')[0]):06}")
+    return f"{dataset}{'_'}{seq}{int(fname.split('.')[0]):06}"
 
 
 def read_seqinfo(path):
@@ -132,7 +132,7 @@ def main():
             #break
             anns = [{'ped_id': int(row[1]),
                         'frame_n': row[0],
-                        'category_id': 1,
+                        'category_id': int(row[7]),
                         'id': f"{get_img_id(args.dataset, seq, f'{int(row[0]):06}.jpg')}{int(row_i):010}{'_NO_BG' if args.no_bg else ''}",
                         'image_id': get_img_id(args.dataset, seq, f'{int(row[0]):06}.jpg'),
                         'bbox': row[2:6].tolist(),
