@@ -4,7 +4,7 @@ model:
 
 data:
   type: image
-  root: data/MOT17_with_MOTS20_GT/train
+  root: data/MOT17/train
   sources: ['MOT17-02', 'MOT17-05', 'MOT17-09', 'MOT17-11']
   targets: ['MOT17-02', 'MOT17-05', 'MOT17-09', 'MOT17-11']
   height: 256
