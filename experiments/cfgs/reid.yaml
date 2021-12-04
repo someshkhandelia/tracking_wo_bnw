@@ -11,7 +11,7 @@ data:
   width: 128
   combineall: False
   transforms: ['random_flip']
-  save_dir: 'tensorboard/tracktor/reid/MOT17_with_MOTS20_GT_split_02'
+  save_dir: 'tensorboard/tracktor/reid/MOT17_split_02'
   workers: 0
 
 loss:
