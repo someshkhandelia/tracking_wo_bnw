@@ -110,6 +110,7 @@ class ImageSoftmaxEngine(torchreid.engine.ImageSoftmaxEngine):
             )
 
         if self.writer is None and not test_only:
+            print("####################### INITIATED A TENSORBOARD WRITER ##########################")
             self.writer = SummaryWriter(log_dir=save_dir)
 
         self.epoch = 0
@@ -244,6 +245,7 @@ class ImageSoftmaxEngine(torchreid.engine.ImageSoftmaxEngine):
             if self.writer is not None:
                 self.writer.add_scalar(f'Test/{name}/rank1', rank1, self.epoch)
                 self.writer.add_scalar(f'Test/{name}/mAP', mAP, self.epoch)
+                print("######################### SUCCESSFULLY WRITTEN TO TENSORBOARD LOGS #########################")
 
             rank1_list.append(rank1)
 
