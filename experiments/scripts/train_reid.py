@@ -136,6 +136,7 @@ def main():
     )
 
     if cfg.model.resume and check_isfile(cfg.model.resume):
+        print("Resuming from checkpoint: {}".format(cfg.model.resume))
         cfg.train.start_epoch = resume_from_checkpoint(
             cfg.model.resume, model, optimizer=optimizer, scheduler=scheduler
         )

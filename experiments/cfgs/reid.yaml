@@ -1,6 +1,7 @@
 model:
   name: resnet50_fc512
   pretrained: True
+  resume: 'tensorboard/tracktor/reid/MOT17_split_02/model/model-last.pth.tar'
 
 data:
   type: image
