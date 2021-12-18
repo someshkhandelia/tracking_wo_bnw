@@ -189,7 +189,7 @@ def main():
                     box_im = ped_im_from_anno(args.data_root, anno, im_anns)
                     box_path = osp.join(reid_imgs_path, f"{anno['id']}.png")
                     box_im.save(box_path)
-                except SystemError:
+                except:
                     print("Could not save reid image for:")
                     print(str(anno))
 
