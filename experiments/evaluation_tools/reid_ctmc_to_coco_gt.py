@@ -40,7 +40,7 @@ def crop_box(im, bbox):
     x2, y2 = x1+ w, y1+ h
     return im.crop((x1, y1, x2, y2))
 
-
+# This function crops the original image and gives the pedestrian/cell
 def ped_im_from_anno(data_root, anno, im_anns):
     im_path = osp.join(data_root, im_anns[anno['image_id']]['file_name'])
     im = Image.open(im_path)

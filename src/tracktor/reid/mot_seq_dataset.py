@@ -152,6 +152,9 @@ class MOTSeqDataset(ImageDataset):
 
         df = anns2df_motcha(anns, img_dir)
         df['reid_id'] = df['ped_id']
+        ######## DEBUGGING ####################
+        print("DF without cleaning")
+        print(df)
 
         df = clean_rows(df,
             self.cfg.min_vis,
@@ -159,6 +162,10 @@ class MOTSeqDataset(ImageDataset):
             min_w=self.cfg.min_w,
             min_samples=self.cfg.min_samples,
             sample_nth_frame=self.cfg.sample_nth_frame)
+
+        print("DF after cleaning")
+        print(df)
+        #########################################
         df = relabel_ids(df)
         df['cam_id'] = 0
 
