@@ -88,23 +88,23 @@ def main():
     print(f'NO_BG: {args.no_bg}')
 
     for split in SPLITS:
-        data_path = osp.join(args.data_root, args.dataset, split)
+        data_path = osp.join(args.data_root, args.dataset, split) # this is data/CTMC/train
         seqs = os.listdir(data_path)
         seqs = [s for s in seqs
                 if not s.endswith('GT') and not s.startswith('.') and not s.endswith('.json') and not s == 'reid']
-        seqs = sorted(seqs)
+        seqs = sorted(seqs) # all the sequences folders (not including reid and json files)
 
         # generate reid data
         reid_imgs_path = osp.join(data_path, 'reid')
-        os.makedirs(reid_imgs_path, exist_ok=True)
+        os.makedirs(reid_imgs_path, exist_ok=True) # create reid directory
 
         for seq in seqs:
             print(f"Processing sequence {seq} in dataset {args.dataset}")
 
-            seq_path = osp.join(data_path, seq)
-            seqinfo_path = osp.join(seq_path, 'seqinfo.ini')
-            gt_path = osp.join(seq_path, 'gt/gt.txt')
-            im_dir = osp.join(seq_path, 'img1')
+            seq_path = osp.join(data_path, seq) # this is data/CTMC/train/seq
+            seqinfo_path = osp.join(seq_path, 'seqinfo.ini') # this is data/CTMC/train/seq/seqinfo.ini
+            gt_path = osp.join(seq_path, 'gt/gt.txt') # this is ground truth file data/CTMC/train/seq/gt/gt.txt 
+            im_dir = osp.join(seq_path, 'img1') # this is where the training images for the sequence are stored data/CTMC/train/seq/img1 
 
             seqinfo = read_seqinfo(seqinfo_path)
             # data = {'info': {'sequence': seq,
@@ -115,16 +115,16 @@ def main():
             #         'images': [],
             #         'annotations': [],
             #         'categories': [{'id': 1, 'name': 'person', 'supercategory': 'person'}]}
-            data = {'info': {'sequence': seq,
-                                'dataset': args.dataset,
-                                'split': split,
+            data = {'info': {'sequence': seq, # seq name
+                                'dataset': args.dataset, # CTMC
+                                'split': split, # train
                                 'creation_date': datetime.datetime.today().strftime('%Y-%m-%d-%H-%M'),
                                 **seqinfo},
                     'images': [],
                     'annotations': []}
 
             # Load Bounding Box annotations
-            gt = np.loadtxt(gt_path, dtype=np.float32, delimiter=',')
+            gt = np.loadtxt(gt_path, dtype=np.float32, delimiter=',') # ground truth data is kept in an array
             # keep_classes = [1, 2, 7, 8, 12]
             # keep_classes = [1]
             # mask = np.isin(gt[:, 7], keep_classes)
@@ -184,14 +184,19 @@ def main():
             # generate reid data
             im_anns = get_im_anns_dict(data)
 
+
+            # important thing to note due to the exception handling here:
+            # there may exist an annotation but because of erroneous data, no proper bounding box,
+            # and consequently no training image...therefore...some images might be missing for some annotations 
             for anno in tqdm.tqdm(data['annotations']):
                 try:
                     box_im = ped_im_from_anno(args.data_root, anno, im_anns)
-                    box_path = osp.join(reid_imgs_path, f"{anno['id']}.png")
+                    # save every sequence's training data in separate directory to prevent google drive timeout errors
+                    box_path = osp.join(reid_imgs_path, seq, f"{anno['id']}.png")  
                     box_im.save(box_path)
                 except:
                     print("Could not save reid image for:")
-                    print(str(anno))
+                    print(str(osp.join(reid_imgs_path, seq, f"{anno['id']}.png")))
 
             # save annotation file
             ann_dir = data_path
@@ -207,7 +212,22 @@ def main():
                 for i in range(len(data['annotations'])):
                     data['annotations'][i]['mask'] = None
 
-            save_json(data, ann_file)
+
+            # remove those annotations whose boxes did not get saved due to any reason
+            data_2 = dict()
+            data_2['info'] = data['info']
+            data_2['images'] = data['images']
+            data_2['annotations'] = []
+
+            for anno in data['annotations']:
+                box_path = osp.join(reid_imgs_path, seq, f"{anno['id']}.png")
+                if osp.exists(box_path):
+                    data_2['annotations'].append(anno)
+                else:
+                    print("Did not save annotation for:")
+                    print(str(box_path))
+
+            save_json(data_2, ann_file)
             print(f"Saving annotation file in {ann_file}.\n")
 
 
