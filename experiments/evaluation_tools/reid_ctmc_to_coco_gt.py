@@ -97,11 +97,12 @@ def main():
         # generate reid data
         reid_imgs_path = osp.join(data_path, 'reid')
         os.makedirs(reid_imgs_path, exist_ok=True) # create reid directory
-        reid_seq_path = osp.join(reid_imgs_path, seq)
-        os.makedirs(reid_seq_path, exist_ok=True) # create sequence directory inside reid directory
 
         for seq in seqs:
             print(f"Processing sequence {seq} in dataset {args.dataset}")
+
+            reid_seq_path = osp.join(reid_imgs_path, seq)
+            os.makedirs(reid_seq_path, exist_ok=True) # create sequence directory inside reid directory
 
             seq_path = osp.join(data_path, seq) # this is data/CTMC/train/seq
             seqinfo_path = osp.join(seq_path, 'seqinfo.ini') # this is data/CTMC/train/seq/seqinfo.ini
