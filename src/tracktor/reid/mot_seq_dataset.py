@@ -101,7 +101,7 @@ def to_tuple_list(df):
 
 
 def sample_random_per_reid_id(df, num):
-    per_reid_id = df.groupby('reid_id')['index'].agg(lambda x: list(np.random.choice(list(x.unique()), size=num, replace=False)))
+    per_reid_id = df.groupby('reid_id')['index'].agg(lambda x: list(np.random.choice(list(x.unique()), size=num, replace=True)))
     return per_reid_id.explode()
 
 
