@@ -95,7 +95,7 @@ def main():
         seqs = sorted(seqs) # all the sequences folders (not including reid and json files)
 
         # generate reid data
-        reid_imgs_path = osp.join(data_path, 'reid')
+        reid_imgs_path = osp.join('/content', 'reid')
         os.makedirs(reid_imgs_path, exist_ok=True) # create reid directory
 
         for seq in seqs:
