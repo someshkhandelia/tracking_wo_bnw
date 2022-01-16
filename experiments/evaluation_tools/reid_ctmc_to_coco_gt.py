@@ -202,7 +202,7 @@ def main():
                     print(str(osp.join(reid_imgs_path, seq, f"{anno['id']}.png")))
 
             # save annotation file
-            ann_dir = data_path
+            ann_dir = '/content/annotation_files/'
             if not osp.exists(ann_dir):
                 os.makedirs(ann_dir)
             os.makedirs(ann_dir, exist_ok=True)
