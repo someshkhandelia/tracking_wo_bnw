@@ -1,18 +1,18 @@
 model:
   name: resnet50_fc512
   pretrained: True
-  resume: 'tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220117/model/model-last.pth.tar'
+  resume: '/content/tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220118/model/model-last.pth.tar'
 
 data:
   type: image
-  root: data/CTMC/train
-  sources: ['A-10-run07', 'BPAE-run07', 'MDOK-run01', '3T3-run03', '3T3-run05', 'MDOK-run07', '3T3-run07', 'CRE-BAG2-run01', 'MDOK-run05', 'LLC-MK2-run01', 'MDBK-run07', 'APM-run01', '3T3-run01', 'CRE-BAG2-run03', 'A-549-run03', 'BPAE-run01', 'OK-run03', 'MDBK-run03', 'MDBK-run01']
-  targets: ['MDBK-run09', 'LLC-MK2-run07', '3T3-run09', 'MDOK-run09', 'LLC-MK2-run03', 'APM-run05', 'A-10-run01', 'A-10-run03', 'LLC-MK2-run05', 'CV-1-run01', 'BPAE-run03', 'BPAE-run05', 'CV-1-run03', 'A-10-run05', 'MDBK-run05', 'APM-run03', 'OK-run01', 'LLC-MK2-run02a', 'MDOK-run03']
+  root: /content # data/CTMC/train
+  sources: ['A-10-run07', 'BPAE-run07', 'MDOK-run01', '3T3-run03', '3T3-run05', 'MDOK-run07', 'U2O-S-run05', 'U2O-S-run03', '3T3-run07', 'CRE-BAG2-run01', 'MDOK-run05', 'LLC-MK2-run01', 'PL1Ut-run03', 'MDBK-run07', 'APM-run01', '3T3-run01', 'CRE-BAG2-run03', 'OK-run07', 'A-549-run03', 'BPAE-run01', 'PL1Ut-run05', 'OK-run03', 'OK-run05', 'RK-13-run03', 'MDBK-run03', 'MDBK-run01']
+  targets: ['MDBK-run09', 'LLC-MK2-run07', '3T3-run09', 'MDOK-run09', 'LLC-MK2-run03', 'APM-run05', 'A-10-run01', 'A-10-run03', 'LLC-MK2-run05', 'CV-1-run01', 'BPAE-run03', 'BPAE-run05', 'PL1Ut-run01', 'CV-1-run03', 'A-10-run05', 'RK-13-run01', 'MDBK-run05', 'APM-run03', 'OK-run01', 'LLC-MK2-run02a', 'MDOK-run03']
   height: 256
   width: 128
   combineall: False
   transforms: ['random_flip']
-  save_dir: 'tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220117'
+  save_dir: '/content/tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220118'
   workers: 0
 
 loss:

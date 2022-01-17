@@ -144,7 +144,7 @@ class MOTSeqDataset(ImageDataset):
 
 
     def get_dataframe(self, root_dir):
-        ann_file = os.path.join(root_dir, f'{self.seq_name}.json')
+        ann_file = os.path.join(root_dir, 'annotation_files', f'{self.seq_name}.json')
         img_dir = os.path.join(root_dir, 'reid', self.seq_name)
 
         # Create a Pandas DataFrame out of json annotations file
