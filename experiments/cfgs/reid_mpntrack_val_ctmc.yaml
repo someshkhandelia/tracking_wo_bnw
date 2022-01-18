@@ -1,12 +1,12 @@
 model:
-  name: resnet50_fc512
   pretrained: True
-  resume: 'tensorboard/tracktor/reid/MPNTrack_val_CTMC/model/model-last.pth.tar'
+  resume: False
+  load_weights: 'tensorboard/tracktor/reid/MPNTrack_val_CTMC/model/resnet50_market_cuhk_duke.tar-232'
 
 data:
   type: image
   root: /content/content # data/CTMC/train
-  sources: []
+  sources: ['MDBK-run05']
   targets: ['MDBK-run05', 'OK-run01', 'LLC-MK2-run02a', 'MDBK-run09', 'LLC-MK2-run07', '3T3-run09', 'LLC-MK2-run03', 'LLC-MK2-run05', 'BPAE-run03']
   height: 256
   width: 128
