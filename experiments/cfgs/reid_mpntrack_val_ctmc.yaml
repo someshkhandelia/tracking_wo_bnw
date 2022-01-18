@@ -1,6 +1,5 @@
 model:
   pretrained: True
-  resume: False
   load_weights: 'tensorboard/tracktor/reid/MPNTrack_val_CTMC/model/resnet50_market_cuhk_duke.tar-232'
 
 data:
