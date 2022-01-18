@@ -23,13 +23,13 @@ def update_datasplits(cfg):
     assert isinstance(cfg.data.sources, (tuple, list))
     assert isinstance(cfg.data.sources, (tuple, list))
 
-    if isinstance(cfg.data.sources[0], (tuple, list)):
-        assert len(cfg.data.sources) == 1
-        cfg.data.sources = cfg.data.sources[0]
+    # if isinstance(cfg.data.sources[0], (tuple, list)):
+    #     assert len(cfg.data.sources) == 1
+    #     cfg.data.sources = cfg.data.sources[0]
 
-    if isinstance(cfg.data.targets[0], (tuple, list)):
-        assert len(cfg.data.targets) == 1
-        cfg.data.targets = cfg.data.targets[0]
+    # if isinstance(cfg.data.targets[0], (tuple, list)):
+    #     assert len(cfg.data.targets) == 1
+    #     cfg.data.targets = cfg.data.targets[0]
 
 
 def register_datasets(datasets, cfg):
