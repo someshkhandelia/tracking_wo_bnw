@@ -11,7 +11,7 @@ data:
   width: 128
   combineall: False
   transforms: ['random_flip']
-  save_dir: 'tensorboard/tracktor/reid/validate_with_random_model'
+  save_dir: 'tensorboard/tracktor/reid/validate_with_random_model_seed_0'
   workers: 0
 
 loss:
@@ -28,6 +28,7 @@ train:
   open_layers: ['fc', 'classifier']
   lr_scheduler: 'single_step'
   stepsize: [10]
+  seed: 0
 
 test:
   batch_size: 100
