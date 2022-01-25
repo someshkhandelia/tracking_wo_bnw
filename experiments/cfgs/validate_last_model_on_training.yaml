@@ -1,6 +1,6 @@
 model:
   pretrained: True
-  load_weights: 'tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220118/model/model-last.pth.tar'
+  load_weights: 'tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220118/model/model-best.pth.tar'
 
 data:
   type: image
