@@ -30,6 +30,7 @@ train:
   open_layers: ['fc', 'classifier']
   lr_scheduler: 'single_step'
   stepsize: [10]
+  seed: 50
 
 test:
   batch_size: 100
