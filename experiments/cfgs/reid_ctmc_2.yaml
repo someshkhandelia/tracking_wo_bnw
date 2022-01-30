@@ -1,0 +1,39 @@
+model:
+  name: resnet50_fc512
+  pretrained: True
+  resume: 'tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220130/model/model-last.pth.tar'
+
+data:
+  type: image
+  root: /content/content # data/CTMC/train
+  sources: ['A-10-run07', 'BPAE-run07', 'MDOK-run01', '3T3-run03', '3T3-run05', 'MDOK-run07', 'U2O-S-run05', '3T3-run07', 'CRE-BAG2-run01', 'MDOK-run05', 'LLC-MK2-run01', 'PL1Ut-run03', 'MDBK-run07', '3T3-run01', 'CRE-BAG2-run03', 'OK-run07', 'A-549-run03', 'BPAE-run01', 'OK-run03', 'OK-run05', 'MDBK-run03', 'MDBK-run01']
+  targets: ['MDBK-run05', 'OK-run01', 'LLC-MK2-run02a', 'MDBK-run09', 'LLC-MK2-run07', '3T3-run09', 'LLC-MK2-run03', 'LLC-MK2-run05', 'BPAE-run03']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip']
+  save_dir: 'tensorboard/tracktor/reid/CTMC_reid_training_start_date_20220130'
+  workers: 0
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0001
+  max_epoch: 40
+  batch_size: 32
+  fixbase_epoch: 5
+  open_layers: ['fc', 'classifier']
+  lr_scheduler: 'single_step'
+  stepsize: [10]
+
+test:
+  batch_size: 100
+  dist_metric: 'euclidean'
+  normalize_feature: False
+  evaluate: False
+  eval_freq: 1
+  rerank: False
