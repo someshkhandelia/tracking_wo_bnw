@@ -114,6 +114,8 @@ class ImageSoftmaxEngine(torchreid.engine.ImageSoftmaxEngine):
             self.writer = SummaryWriter(log_dir=save_dir)
 
         self.epoch = start_epoch - 1
+
+        # the following section does the validation before training
         self.test(
             dist_metric=dist_metric,
             normalize_feature=normalize_feature,
@@ -124,6 +126,7 @@ class ImageSoftmaxEngine(torchreid.engine.ImageSoftmaxEngine):
             ranks=ranks,
             rerank=rerank
         )
+
         if test_only:
             return
 
@@ -191,7 +194,7 @@ class ImageSoftmaxEngine(torchreid.engine.ImageSoftmaxEngine):
                     'optimizer': self._optims[name].state_dict(),
                     'scheduler': self._scheds[name].state_dict()
                 },
-                osp.join(save_dir, name),
+                osp.join(save_dir, name + str(epoch + 1)),
                 is_best=is_best
             )
 

@@ -1,0 +1,39 @@
+model:
+  name: resnet50_fc512
+  pretrained: True
+  resume: 'tensorboard/tracktor/reid/CTMC_all_data_training_20220202/model/model-last.pth.tar'
+
+data:
+  type: image
+  root: /content/content # data/CTMC/train
+  sources: ['3T3-run03']
+  targets: ['3T3-run03']
+  height: 256
+  width: 128
+  combineall: False
+  transforms: ['random_flip']
+  save_dir: 'tensorboard/tracktor/reid/CTMC_all_data_training_20220202'
+  workers: 0
+
+loss:
+  name: 'softmax'
+  softmax:
+    label_smooth: True
+
+train:
+  optim: 'amsgrad'
+  lr: 0.0001
+  max_epoch: 40
+  batch_size: 32
+  fixbase_epoch: 5
+  open_layers: ['fc', 'classifier']
+  lr_scheduler: 'single_step'
+  stepsize: [10]
+
+test:
+  batch_size: 100
+  dist_metric: 'euclidean'
+  normalize_feature: False
+  evaluate: False
+  eval_freq: 1
+  rerank: False
