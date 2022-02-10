@@ -54,7 +54,7 @@ data/CTMC/train
 ### Generate re-id data
 The following command will create a 'reid' directory inside 'data/CTMC/train/' and several .json annotation files as well.
 <pre>
-python experiments/evaluation_tools/reid_ctmc_to_coco_gt.py --dataset CTMC --data_root data
+python experiments/evaluation_tools/generate_reid_data_ctmc.py --dataset CTMC --data_root data
 </pre>
 
 ### Install torchreid
