@@ -89,5 +89,7 @@ cd ../tracking_wo_bnw/
 
 Train the network
 <pre>
-python experiments/scripts/train_reid.py --config-file "<PATH_TO_ROOT_DIR>/tracking_wo_bnw/experiments/cfgs/reid_ctmc_train_all_data.yaml"
+python experiments/scripts/train_reid.py --config-file "<PATH_TO_ROOT_DIR>/tracking_wo_bnw/experiments/cfgs/reid_ctmc_training.yaml"
 </pre>
+
+This will create a directory inside 'tensorboard' directory, namely 'tracktor/reid/CTMC_training/' where you shall find the tensorboard event files as well as the saved model checkpoints (model is saved after every epoch, as well as best model so far if in the current epoch) during the course of the training.
